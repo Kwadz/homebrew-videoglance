@@ -24,6 +24,12 @@ cask "videoglance" do
 
   app "VideoGlance.app"
 
+  # Stop running Quick Look extensions before Homebrew removes the app.
+  uninstall_preflight_steps do
+    terminate_process "VideoGlanceQL"
+    terminate_process "VideoGlanceThumbnail"
+  end
+
   uninstall quit: [
     "com.videoqlplugin.VideoGlance",
     "com.videoqlplugin.VideoGlance.preview",
